@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+    <script>
+        function show(){
+            oBox.removeEventListener('transitionend',show,false);
+            alert(1);
+        }
+        window.onload = function(){
+            var oBox = document.querySelector('#box');
+            var oBtn = document.querySelector('input');
+            var isClick = false;
+            oBtn.onclick = function(){
+                oBox.style.WebkitTransition = '1s all ease';
+                if(!isClick){
+                    oBox.style.opacity = 0;
+                }else{
+                    oBox.style.opacity = 1;
+                }
+               isClick=!isClick;
+                oBox.addEventListener('transitionend',show,false)
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="隐藏">
+    <div id="box"></div>
+</body>
+</html>

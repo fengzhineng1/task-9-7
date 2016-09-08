@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .clock{
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            border-radius: 50%;
+            margin: 200px auto;
+            position: relative;
+        }
+        .hou{
+            width: 10px;
+            height: 80px;
+            background: #000;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            left: 50%;
+            margin-left: -5px;
+            top: 70px;
+            -webkit-transform-origin: bottom;
+        }
+        .min{
+            width: 8px;
+            height: 100px;
+            background: #000;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            left: 50%;
+            margin-left: -4px;
+            top: 50px;
+            -webkit-transform-origin: bottom;
+        }
+        .sec{
+            width: 6px;
+            height: 120px;
+            background: red;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            left: 50%;
+            margin-left: -3px;
+            top: 30px;
+            -webkit-transform-origin: bottom;
+        }
+        span{
+            width: 6px;
+            height: 12px;
+            background: black;
+            position: absolute;
+            left: 50%;
+            margin-left: -3px;
+            -webkit-transform-origin: center 150px;
+        }
+        .span1{
+            width: 6px;
+            height: 18px;
+            background: black;
+            position: absolute;
+            left: 50%;
+            margin-left: -3px;
+            -webkit-transform-origin: center 150px;
+        }
+        em{
+            position: absolute;
+            top: 18px;
+            width: 30px;
+            left: -15px;
+            text-align: center;
+            /*display: inline-block;*/
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oClock = document.querySelector('.clock');
+            var aDiv = oClock.querySelectorAll('div');
+            var N = 60;
+            for(var i = 0;i < N;i++){
+                var oS = document.createElement('span');
+                oS.style.WebkitTransform = 'rotate('+i*6+'deg)';
+                if(i%5==0){
+                    oS.className = 'span1';
+                    oS.innerHTML = '<em>'+(i/5||12)+'</em>';
+                    var oEm = oS.children[0];
+                    oEm.style.WebkitTransform = 'rotate('+(-i*6)+'deg)'
+                }
+                oClock.appendChild(oS);
+            }
+
+            function clock(){
+                var oDate = new Date();
+                var h = oDate.getHours();
+                var m = oDate.getMinutes();
+                var s = oDate.getSeconds();
+                var ms = oDate.getMilliseconds();
+
+
+                aDiv[0].style.WebkitTransform = 'rotate('+(h*30+0.5*m)+'deg)';
+                aDiv[1].style.WebkitTransform = 'rotate('+(m*6+s/10)+'deg)';
+                aDiv[2].style.WebkitTransform = 'rotate('+(s*6+ms/1000*6)+'deg)';
+            }
+
+            clock();
+
+            setInterval(clock,1);
+        };
+    </script>
+</head>
+<body>
+    <div class="clock">
+        <div class="hou"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+    </div>
+</body>
+</html>

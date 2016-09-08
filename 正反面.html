@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width: 200px;
+            height: 400px;
+            margin: 200px auto;
+            -webkit-transform: rotateY(0deg) perspective(800px);
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: 1s all ease;
+        }
+        #box div{
+            width: 200px;
+            height: 400px;
+            position: absolute;
+            text-align: center;
+            line-height: 400px;
+
+        }
+        .front{
+            background: red;
+            -webkit-transform: translateZ(1px);
+        }
+        .back{
+            background: green;
+            -webkit-transform: translateZ(-1px) scale(-1,1);
+        }
+        #box:active{
+            -webkit-transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="front">正面</div>
+        <div class="back">反面</div>
+    </div>
+</body>
+</html>
